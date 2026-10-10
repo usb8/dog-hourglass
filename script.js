@@ -32,17 +32,19 @@ function setSliderFill() {
 
 function setSand(card, upperPercent, lowerPercent) {
   card.style.setProperty("--upper-sand-level", `${upperPercent}%`);
-  const upperSurface = 28 + (1 - upperPercent / 78) * 117;
-  const lowerSurface = 292 - (lowerPercent / 78) * 117;
+  // Keep the sand body inside a conservative inner rectangle. The SVG clip
+  // paths handle the chamber silhouette while these insets prevent edge bleed.
+  const upperSurface = 35 + (1 - upperPercent / 78) * 103;
+  const lowerSurface = 285 - (lowerPercent / 78) * 103;
   const upperSand = card.querySelector(".upper-sand");
   const lowerSand = card.querySelector(".lower-sand");
   upperSand.querySelector(".sand-body").setAttribute(
     "d",
-    `M 15 ${upperSurface} Q 90 ${upperSurface + 8} 165 ${upperSurface} L 165 165 L 15 165 Z`,
+    `M 37 ${upperSurface} L 143 ${upperSurface} L 143 146 L 37 146 Z`,
   );
   lowerSand.querySelector(".sand-body").setAttribute(
     "d",
-    `M 15 ${lowerSurface} Q 90 ${lowerSurface - 8} 165 ${lowerSurface} L 165 305 L 15 305 Z`,
+    `M 37 ${lowerSurface} L 143 ${lowerSurface} L 143 285 L 37 285 Z`,
   );
   upperSand.style.opacity = upperPercent > 0.5 ? "1" : "0";
   lowerSand.style.opacity = lowerPercent > 0.5 ? "1" : "0";
