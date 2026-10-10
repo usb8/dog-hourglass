@@ -438,6 +438,111 @@ button:focus-visible {
 .complete .card-status {
   color: #a87913;
 }
+
+/* SVG hourglass illustration: the sand shapes are updated from timer progress. */
+.glass-frame {
+  width: 180px;
+  height: 320px;
+  display: block;
+  overflow: visible;
+}
+[data-size='small'] .glass-frame {
+  transform: scale(0.72);
+}
+[data-size='medium'] .glass-frame {
+  transform: scale(0.9);
+}
+[data-size='large'] .glass-frame {
+  transform: scale(1.08);
+}
+.glass-fill {
+  fill: rgb(255 255 255 / 22%);
+  stroke: none;
+}
+.glass-outline {
+  fill: none;
+  stroke: rgb(81 111 116 / 76%);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.glass-highlight {
+  fill: none;
+  stroke: rgb(255 255 255 / 76%);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.65;
+}
+.neck-ring {
+  fill: rgb(112 142 144 / 34%);
+  stroke: rgb(81 111 116 / 76%);
+  stroke-width: 2;
+}
+.cap {
+  fill: #779396;
+  stroke: #506c70;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.sand-layer {
+  opacity: 1;
+}
+.sand-layer .sand-body {
+  fill: var(--sand);
+  stroke: rgb(173 128 35 / 24%);
+  stroke-width: 1;
+}
+.sand-grains circle,
+.falling-grains circle {
+  fill: #f3c95e;
+  stroke: rgb(173 128 35 / 30%);
+  stroke-width: 0.8;
+}
+.sand-grains circle:nth-child(3n) {
+  fill: #dba83b;
+}
+.sand-grains circle:nth-child(4n) {
+  fill: #f8d979;
+}
+.sand-stream {
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  opacity: 0;
+}
+.stream-core {
+  fill: none;
+  stroke: var(--sand);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+.falling-grains circle {
+  animation: grain-fall 0.85s linear infinite;
+}
+.falling-grains circle:nth-child(2n) {
+  animation-delay: -0.42s;
+}
+.falling-grains circle:nth-child(3n) {
+  animation-delay: -0.2s;
+}
+.running .sand-stream {
+  opacity: 1;
+  animation: none;
+}
+.running .sand-stream .stream-core {
+  animation: stream-pulse 1.2s ease-in-out infinite;
+}
+@keyframes grain-fall {
+  from { transform: translateY(-4px); opacity: 0.35; }
+  45% { opacity: 1; }
+  to { transform: translateY(9px); opacity: 0.35; }
+}
+@keyframes stream-pulse {
+  0%, 100% { stroke-width: 4.5; opacity: 0.85; }
+  50% { stroke-width: 5.5; opacity: 1; }
+}
+
 .session-note {
   display: flex;
   gap: 12px;

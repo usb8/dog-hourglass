@@ -32,8 +32,50 @@ function setSliderFill() {
 
 function setSand(card, upperPercent, lowerPercent) {
   card.style.setProperty("--upper-sand-level", `${upperPercent}%`);
-  card.querySelector(".upper-sand").style.height = `${upperPercent}%`;
-  card.querySelector(".lower-sand").style.height = `${lowerPercent}%`;
+  const upperSurface = 28 + (1 - upperPercent / 78) * 117;
+  const lowerSurface = 292 - (lowerPercent / 78) * 117;
+  const upperSand = card.querySelector(".upper-sand");
+  const lowerSand = card.querySelector(".lower-sand");
+  upperSand.querySelector(".sand-body").setAttribute(
+    "d",
+    `M 15 ${upperSurface} Q 90 ${upperSurface + 8} 165 ${upperSurface} L 165 165 L 15 165 Z`,
+  );
+  lowerSand.querySelector(".sand-body").setAttribute(
+    "d",
+    `M 15 ${lowerSurface} Q 90 ${lowerSurface - 8} 165 ${lowerSurface} L 165 305 L 15 305 Z`,
+  );
+  upperSand.style.opacity = upperPercent > 0.5 ? "1" : "0";
+  lowerSand.style.opacity = lowerPercent > 0.5 ? "1" : "0";
+}
+
+function createSandGrains() {
+  const upperPositions = [
+    [48, 48, 3.1], [78, 63, 2.7], [117, 50, 3.2], [137, 77, 2.5],
+    [61, 91, 2.4], [99, 82, 3], [126, 104, 2.7], [48, 113, 2.8],
+    [78, 121, 2.4], [108, 116, 2.5], [140, 126, 2.2],
+  ];
+  const lowerPositions = [
+    [50, 273, 2.5], [73, 260, 3], [105, 269, 2.5], [132, 277, 2.8],
+    [62, 245, 2.4], [91, 251, 3.1], [119, 237, 2.5], [83, 228, 2.4],
+    [108, 220, 2.6], [72, 282, 2.4], [127, 286, 2.7],
+  ];
+  const fallingPositions = [[87, 155, 2.3], [93, 159, 2.7], [89, 164, 2.1], [94, 169, 2.4], [88, 173, 2.2]];
+  cards.forEach((card) => {
+    const svg = card.querySelector(".glass-frame");
+    const addCircles = (selector, positions) => {
+      const group = svg.querySelector(selector);
+      positions.forEach(([cx, cy, r]) => {
+        const grain = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        grain.setAttribute("cx", cx);
+        grain.setAttribute("cy", cy);
+        grain.setAttribute("r", r);
+        group.appendChild(grain);
+      });
+    };
+    addCircles(".upper-grains", upperPositions);
+    addCircles(".lower-grains", lowerPositions);
+    addCircles(".falling-grains", fallingPositions);
+  });
 }
 
 function updateSelection(fillActiveSand = true) {
@@ -164,6 +206,7 @@ slider.addEventListener("input", () => {
   updateSelection();
 });
 
+createSandGrains();
 startButton.addEventListener("click", startSession);
 resetButton.addEventListener("click", resetSession);
 
