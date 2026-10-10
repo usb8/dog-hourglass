@@ -6,6 +6,8 @@ const slider = document.querySelector("#duration-slider");
 const durationOutput = document.querySelector("#duration-output");
 const demoMode = document.querySelector("#demo-mode");
 const sessionMessage = document.querySelector("#session-message");
+const startButton = document.querySelector("#start-button");
+const resetButton = document.querySelector("#reset-button");
 const cards = [...document.querySelectorAll(".hourglass-card")];
 
 let selectedHours = Number(slider.value);
@@ -118,7 +120,7 @@ function startSession() {
   slider.disabled = true;
   demoMode.disabled = true;
   activeCard.classList.add("running");
-  activeCard.querySelector(".start-button").disabled = true;
+  startButton.disabled = true;
   activeCard.querySelector(".card-status").textContent = "Sand is flowing";
   sessionMessage.textContent = isDemo
     ? "Demo Mode is running — the full session is compressed to 24 seconds."
@@ -133,7 +135,7 @@ function completeSession() {
   setSand(activeCard, 0, 78);
   activeCard.classList.remove("running");
   activeCard.classList.add("complete");
-  activeCard.querySelector(".start-button").disabled = false;
+  startButton.disabled = false;
   activeCard.querySelector(".card-status").textContent = "Time is up";
   sessionMessage.textContent = "Time is up. The yellow light stays on until you reset the hourglass.";
   playCompletionTone();
@@ -150,10 +152,8 @@ function resetSession() {
   demoMode.checked = false;
   slider.disabled = false;
   demoMode.disabled = false;
-  cards.forEach((card) => {
-    card.classList.remove("running", "complete", "inactive");
-    card.querySelector(".start-button").disabled = false;
-  });
+  cards.forEach((card) => card.classList.remove("running", "complete", "inactive"));
+  startButton.disabled = false;
   updateSelection(false);
   sessionMessage.textContent = "Reset complete. Choose a duration to begin again.";
 }
@@ -164,9 +164,7 @@ slider.addEventListener("input", () => {
   updateSelection();
 });
 
-cards.forEach((card) => {
-  card.querySelector(".start-button").addEventListener("click", startSession);
-  card.querySelector(".reset-button").addEventListener("click", resetSession);
-});
+startButton.addEventListener("click", startSession);
+resetButton.addEventListener("click", resetSession);
 
 updateSelection(false);

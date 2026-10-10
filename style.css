@@ -187,6 +187,14 @@ input[type='range']:focus-visible {
   outline: 3px solid rgb(93 174 209 / 40%);
   outline-offset: 3px;
 }
+.panel-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 19px;
+}
+.panel-actions button {
+  min-width: 112px;
+}
 
 .hourglasses {
   display: grid;
@@ -208,7 +216,11 @@ input[type='range']:focus-visible {
     transform 0.25s ease;
 }
 .hourglass-card.inactive {
-  opacity: 0.47;
+  opacity: 0.6;
+  background: rgb(251 250 246 / 72%);
+  border-color: rgb(93 174 209 / 50%);
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
 }
 .hourglass-card.active {
   background: rgb(251 250 246 / 72%);
@@ -243,17 +255,6 @@ input[type='range']:focus-visible {
   font-weight: 700;
 }
 .active .selection-badge {
-  visibility: visible;
-}
-.glass-controls {
-  display: flex;
-  gap: 7px;
-  justify-content: center;
-  min-height: 37px;
-  margin: 14px 0 10px;
-  visibility: hidden;
-}
-.active .glass-controls {
   visibility: visible;
 }
 button {
@@ -291,13 +292,13 @@ button:focus-visible {
   position: relative;
   display: grid;
   place-items: center;
-  height: 265px;
+  height: 285px;
 }
 [data-size='medium'] .hourglass-visual {
-  height: 295px;
+  height: 315px;
 }
 [data-size='large'] .hourglass-visual {
-  height: 330px;
+  height: 350px;
 }
 .glass-frame {
   position: relative;
@@ -305,10 +306,13 @@ button:focus-visible {
   height: 230px;
 }
 [data-size='small'] .glass-frame {
-  transform: scale(0.78);
+  transform: scale(0.9);
+}
+[data-size='medium'] .glass-frame {
+  transform: scale(1.05);
 }
 [data-size='large'] .glass-frame {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 .glass-chamber {
   position: absolute;
@@ -488,12 +492,6 @@ button:focus-visible {
     grid-column: 1;
     grid-row: 1;
   }
-  .glass-controls {
-    grid-column: 2;
-    grid-row: 1;
-    justify-content: end;
-    margin: 0;
-  }
   .hourglass-visual {
     grid-column: 1 / -1;
     grid-row: 2;
@@ -505,6 +503,9 @@ button:focus-visible {
   }
   [data-size='large'] .glass-frame {
     transform: scale(1);
+  }
+  [data-size='medium'] .glass-frame {
+    transform: scale(0.95);
   }
   .light-indicator {
     top: 5px;
