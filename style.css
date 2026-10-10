@@ -198,7 +198,7 @@ input[type='range']:focus-visible {
 
 .hourglasses {
   display: grid;
-  grid-template-columns: 0.82fr 1fr 1.18fr;
+  grid-template-columns: 0.68fr 1fr 1.32fr;
   align-items: end;
   gap: 20px;
   margin-top: 12px;
@@ -292,13 +292,13 @@ button:focus-visible {
   position: relative;
   display: grid;
   place-items: center;
-  height: 285px;
+  height: 270px;
 }
 [data-size='medium'] .hourglass-visual {
   height: 315px;
 }
 [data-size='large'] .hourglass-visual {
-  height: 350px;
+  height: 365px;
 }
 .glass-frame {
   position: relative;
@@ -306,13 +306,13 @@ button:focus-visible {
   height: 230px;
 }
 [data-size='small'] .glass-frame {
-  transform: scale(0.9);
+  transform: scale(0.78);
 }
 [data-size='medium'] .glass-frame {
   transform: scale(1.05);
 }
 [data-size='large'] .glass-frame {
-  transform: scale(1.2);
+  transform: scale(1.28);
 }
 .glass-chamber {
   position: absolute;
@@ -495,6 +495,11 @@ button:focus-visible {
   .hourglass-visual {
     grid-column: 1 / -1;
     grid-row: 2;
+    height: 225px;
+  }
+  [data-size='small'] .hourglass-visual,
+  [data-size='medium'] .hourglass-visual,
+  [data-size='large'] .hourglass-visual {
     height: 225px;
   }
   .card-status {
