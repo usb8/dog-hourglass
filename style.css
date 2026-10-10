@@ -454,12 +454,12 @@ button:focus-visible {
   color: var(--yellow);
   font-size: 1.2rem;
 }
-footer {
+/* footer {
   margin-top: 42px;
   color: #929b96;
   text-align: center;
   font-size: 0.68rem;
-}
+} */
 
 @media (max-width: 680px) {
   .app-shell {

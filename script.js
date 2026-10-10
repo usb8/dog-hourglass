@@ -90,7 +90,7 @@ function renderProgress(now) {
   const elapsed = now - session.startedAt;
   const progress = Math.min(elapsed / session.durationMs, 1);
   setSand(activeCard, 78 * (1 - progress), 78 * progress);
-  activeCard.querySelector(".card-status").textContent = `${formatRemaining(session.durationMs - elapsed)} remaining`;
+  activeCard.querySelector(".card-status").textContent = `${formatRemaining(session.durationMs - elapsed)}`;
 
   if (progress >= 1) {
     completeSession();
