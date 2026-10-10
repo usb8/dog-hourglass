@@ -1,6 +1,7 @@
-const DEMO_DURATION_MS = 24_000;
+const DEMO_DURATION_MS = 20_000;
 const REAL_REPEAT_DELAY_MS = 30_000;
-const DEMO_REPEAT_DELAY_MS = 3_000;
+const DEMO_REPEAT_DELAY_MS = 2_000;
+const COMPLETION_SOUND_COUNT = 5;
 
 const slider = document.querySelector("#duration-slider");
 const durationOutput = document.querySelector("#duration-output");
@@ -14,7 +15,7 @@ let selectedHours = Number(slider.value);
 let activeCard = null;
 let session = null;
 let animationFrame = null;
-let repeatSoundTimeout = null;
+let repeatSoundTimeouts = [];
 let audioContext = null;
 
 function formatDuration(hours) {
@@ -113,7 +114,7 @@ function playCompletionTone() {
     oscillator.type = "sine";
     oscillator.frequency.value = 520;
     gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.07, audioContext.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.9, audioContext.currentTime + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.28);
     oscillator.connect(gain).connect(audioContext.destination);
     oscillator.start();
@@ -126,9 +127,9 @@ function playCompletionTone() {
 
 function clearSessionTimers() {
   if (animationFrame) cancelAnimationFrame(animationFrame);
-  if (repeatSoundTimeout) clearTimeout(repeatSoundTimeout);
+  repeatSoundTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
   animationFrame = null;
-  repeatSoundTimeout = null;
+  repeatSoundTimeouts = [];
 }
 
 function renderProgress(now) {
@@ -183,9 +184,13 @@ function completeSession() {
   activeCard.querySelector(".card-status").textContent = "Time is up";
   sessionMessage.textContent = "Time is up. The yellow light stays on until you reset the hourglass.";
   playCompletionTone();
-  repeatSoundTimeout = setTimeout(() => {
-    if (session?.state === "complete") playCompletionTone();
-  }, session.isDemo ? DEMO_REPEAT_DELAY_MS : REAL_REPEAT_DELAY_MS);
+  const repeatDelay = session.isDemo ? DEMO_REPEAT_DELAY_MS : REAL_REPEAT_DELAY_MS;
+  for (let soundNumber = 1; soundNumber < COMPLETION_SOUND_COUNT; soundNumber += 1) {
+    const timeoutId = setTimeout(() => {
+      if (session?.state === "complete") playCompletionTone();
+    }, repeatDelay * soundNumber);
+    repeatSoundTimeouts.push(timeoutId);
+  }
 }
 
 function resetSession() {
