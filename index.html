@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f0e8" />
+    <title>Hourglass Timer for Dogs</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="intro">
+        <p class="eyebrow">A calm leaving-home ritual</p>
+        <h1>Hourglass Timer <span>for Dogs</span></h1>
+        <p class="intro-copy">
+          Choose a duration, point to the running sand, and let this quiet visual
+          cue mark the time until you return.
+        </p>
+      </header>
+
+      <section class="controls-panel" aria-labelledby="duration-heading">
+        <div class="duration-heading">
+          <div>
+            <p class="section-label">01 / Choose a duration</p>
+            <h2 id="duration-heading">How long will you be away?</h2>
+          </div>
+          <output id="duration-output" for="duration-slider">1 hour</output>
+        </div>
+
+        <div class="slider-row">
+          <span aria-hidden="true">1h</span>
+          <input
+            id="duration-slider"
+            type="range"
+            min="1"
+            max="16"
+            value="1"
+            step="1"
+            aria-label="Away duration in hours"
+          />
+          <span aria-hidden="true">16h</span>
+        </div>
+
+        <label class="demo-toggle">
+          <input id="demo-mode" type="checkbox" />
+          <span class="toggle-track" aria-hidden="true"><span></span></span>
+          <span>
+            <strong>Demo Mode</strong>
+            <small>Preview a full session in 24 seconds</small>
+          </span>
+        </label>
+      </section>
+
+      <section class="hourglasses" aria-label="Available hourglasses">
+        <article class="hourglass-card" data-size="small" data-range="1–3 hours">
+          <div class="card-heading">
+            <div>
+              <p class="size-label">Small</p>
+              <p class="range-label">1–3 hours</p>
+            </div>
+            <span class="selection-badge">Selected</span>
+          </div>
+          <div class="glass-controls" aria-label="Controls for the small hourglass">
+            <button class="start-button" type="button">Start</button>
+            <button class="reset-button" type="button">Stop / Reset</button>
+          </div>
+          <div class="hourglass-visual">
+            <div class="light-indicator" aria-hidden="true"></div>
+            <div class="glass-frame" aria-hidden="true">
+              <div class="glass-chamber upper-chamber">
+                <div class="sand upper-sand"></div>
+              </div>
+              <div class="neck"></div>
+              <div class="glass-chamber lower-chamber">
+                <div class="sand lower-sand"></div>
+              </div>
+              <div class="sand-stream"></div>
+              <i class="cap cap-top"></i>
+              <i class="cap cap-bottom"></i>
+            </div>
+          </div>
+          <p class="card-status">Ready when you are</p>
+        </article>
+
+        <article class="hourglass-card" data-size="medium" data-range="4–9 hours">
+          <div class="card-heading">
+            <div>
+              <p class="size-label">Medium</p>
+              <p class="range-label">4–9 hours</p>
+            </div>
+            <span class="selection-badge">Selected</span>
+          </div>
+          <div class="glass-controls" aria-label="Controls for the medium hourglass">
+            <button class="start-button" type="button">Start</button>
+            <button class="reset-button" type="button">Stop / Reset</button>
+          </div>
+          <div class="hourglass-visual">
+            <div class="light-indicator" aria-hidden="true"></div>
+            <div class="glass-frame" aria-hidden="true">
+              <div class="glass-chamber upper-chamber">
+                <div class="sand upper-sand"></div>
+              </div>
+              <div class="neck"></div>
+              <div class="glass-chamber lower-chamber">
+                <div class="sand lower-sand"></div>
+              </div>
+              <div class="sand-stream"></div>
+              <i class="cap cap-top"></i>
+              <i class="cap cap-bottom"></i>
+            </div>
+          </div>
+          <p class="card-status">Ready when you are</p>
+        </article>
+
+        <article class="hourglass-card" data-size="large" data-range="10–16 hours">
+          <div class="card-heading">
+            <div>
+              <p class="size-label">Large</p>
+              <p class="range-label">10–16 hours</p>
+            </div>
+            <span class="selection-badge">Selected</span>
+          </div>
+          <div class="glass-controls" aria-label="Controls for the large hourglass">
+            <button class="start-button" type="button">Start</button>
+            <button class="reset-button" type="button">Stop / Reset</button>
+          </div>
+          <div class="hourglass-visual">
+            <div class="light-indicator" aria-hidden="true"></div>
+            <div class="glass-frame" aria-hidden="true">
+              <div class="glass-chamber upper-chamber">
+                <div class="sand upper-sand"></div>
+              </div>
+              <div class="neck"></div>
+              <div class="glass-chamber lower-chamber">
+                <div class="sand lower-sand"></div>
+              </div>
+              <div class="sand-stream"></div>
+              <i class="cap cap-top"></i>
+              <i class="cap cap-bottom"></i>
+            </div>
+          </div>
+          <p class="card-status">Ready when you are</p>
+        </article>
+      </section>
+
+      <section class="session-note" aria-live="polite">
+        <span class="note-icon">✦</span>
+        <p id="session-message">
+          The selected hourglass is filled and ready. The other two stay empty.
+        </p>
+      </section>
+
+      <footer>
+        <p>Design prototype only — this concept has not been proven to reduce stress in dogs.</p>
+      </footer>
+    </main>
+  </body>
+</html>
