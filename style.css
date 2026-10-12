@@ -445,13 +445,28 @@ button:focus-visible {
   animation: stream-pulse 1.2s ease-in-out infinite;
 }
 @keyframes grain-fall {
-  from { transform: translateY(-4px); opacity: 0.35; }
-  45% { opacity: 1; }
-  to { transform: translateY(9px); opacity: 0.35; }
+  from {
+    transform: translateY(-4px);
+    opacity: 0.35;
+  }
+  45% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(9px);
+    opacity: 0.35;
+  }
 }
 @keyframes stream-pulse {
-  0%, 100% { stroke-width: 4.5; opacity: 0.85; }
-  50% { stroke-width: 5.5; opacity: 1; }
+  0%,
+  100% {
+    stroke-width: 4.5;
+    opacity: 0.85;
+  }
+  50% {
+    stroke-width: 5.5;
+    opacity: 1;
+  }
 }
 
 .session-note {
@@ -474,12 +489,12 @@ button:focus-visible {
   color: var(--yellow);
   font-size: 1.2rem;
 }
-/* footer {
+footer {
   margin-top: 42px;
   color: #929b96;
   text-align: center;
   font-size: 0.68rem;
-} */
+}
 
 @media (max-width: 680px) {
   .app-shell {
